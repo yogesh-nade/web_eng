@@ -8,5 +8,7 @@ venv/Scripts/activate    // to activate virtual env
 
 pip install flask Flask-PyMongo Flask-WTF
 
-add your mongodb URI in the init.py file
+add your mongodb URI in the init.py file 
+
+<br>
 python run.py
