@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Add CSS specifically for this page -->
+<link rel="stylesheet" href="../static/css/home.css">
+
+    <div class="container">
+        <!-- Latest News Section -->
+        <section class="latest-news">
+            <h2>Latest News</h2>
+            <ul>
+                {% for news in latest_news %}
+                    <li>
+                        <strong>{{ news.title }}</strong> - {{ news.date_published }}
+                        <p>{{ news.description }}</p>
+                        <a href="{{ news.link }}" target="_blank">Read More</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            </div>
+        </section>
+
+        <!-- Important News Section -->
+        <!-- <section class="important-news">
+            <h2>Important Legal Updates</h2>
+            <ul>
+                {% for update in important_updates %}
+                    <li><a href="{{ update.link }}">{{ update.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </section> -->
+
+        <!-- Benchmark Judgments Section -->
+        <!-- <section class="benchmark-judgments">
+            <h2>Benchmark Judgments</h2>
+            <div class="judgment-container">
+                {% for judgment in judgments %}
+                    <div class="judgment-card">
+                        <h3>{{ judgment.case_name }}</h3>
+                        <p>{{ judgment.summary }}</p>
+                        <a href="{{ judgment.link }}" class="read-more">Read Judgment</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section> -->
+
+        <!-- Legal Resources Section -->
+        <section class="legal-resources">
+            <h2>Legal Resources</h2>
+            <div class="resources-container">
+                <ul>
+                    <li><a href="/ipc">Indian Penal Code (IPC)</a></li>
+                    <li><a href="/constitution">Constitution of India</a></li>
+                    <li><a href="/crpc">Code of Criminal Procedure (CrPC)</a></li>
+                    <li><a href="/cpc">Code of Civil Procedure (CPC)</a></li>
+                    <li><a href="/contract-act">Indian Contract Act</a></li>
+                    <li><a href="/consumer-law">Consumer Protection Act</a></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Services</title>
+    <!-- SweetAlert (For Flash Messages) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.12.5/dist/sweetalert2.all.min.js"></script>
+
+    
+    <link rel="stylesheet" href="../static/css/index.css">
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="logo" id="logo">LegalFirm</div>
+        <nav class="nav-links" id="nav-links">
+            <a href="#features" class="nav-item">Features</a>
+            <a href="#services" class="nav-item">Services</a>
+            <a href="#about" class="nav-item">About</a>
+            <a href="#contact" class="nav-item">Contact</a>
+        </nav>
+        <div class="auth-buttons" id="auth-buttons">
+            <a href="{{ url_for('login') }} " class="login-btn">Login</a>
+            <a  href="{{ url_for('register') }} " class="register-btn">Register</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <h1 class="hero-title">Expert Legal Solutions for You</h1>
+        <p class="hero-subtitle">Providing trusted legal services with professionalism and integrity.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Our Features</h2>
+        <ul class="feature-list">
+            <li>24/7 Legal Consultation</li>
+            <li>Trusted and Verified Lawyers</li>
+            <li>Easy Online Case Tracking</li>
+            <li>Affordable Legal Assistance</li>
+        </ul>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <ul class="service-list">
+            <li>Corporate Law</li>
+            <li>Criminal Defense</li>
+            <li>Family & Divorce Law</li>
+            <li>Property & Real Estate</li>
+            <li>Intellectual Property Rights</li>
+        </ul>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Us</h2>
+        <p class="about-text">
+            We are a dedicated team of legal professionals providing top-notch legal solutions for individuals and businesses.
+            With years of experience, we ensure the best legal support for our clients.
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p>Email: contact@legalfirm.com</p>
+        <p>Phone: +123 456 7890</p>
+        <p>Address: 123 Legal Street, Lawtown</p>
+    </section>
+
+    <!-- flash message  -->
+    <main class="container">
+        <div class="content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <script>
+                            Swal.fire({
+                                title: "{{ category.title() }}!",
+                                text: "{{ message }}",
+                                icon: "{{ category }}",
+                                closeOnConfirm: false
+                            });
+                        </script>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+    
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <p>&copy; 2025 LegalFirm. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

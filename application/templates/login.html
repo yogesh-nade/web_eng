@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Legal Aid</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+</head>
+<body>
+
+    <form action="{{ url_for('login') }}" method="POST">
+        {{ form.csrf_token() }}
+        
+        <fieldset class="form-container">
+            <legend class="form-title">Login</legend>
+
+            <div class="form-group">
+                {{ form.email.label(class="form-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-input error-input") }}
+                    {% for error in form.email.errors %}
+                        <div class="error-message">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {{ form.email(class="form-input") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-label") }}
+                {% if form.password.errors %}
+                    {{ form.password(class="form-input error-input") }}
+                    {% for error in form.password.errors %}
+                        <div class="error-message">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {{ form.password(class="form-input") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="submit-btn") }}
+            </div>
+
+            <p class="register-link">Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+        </fieldset>
+    </form>
+
+</body>
+</html>

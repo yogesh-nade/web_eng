@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Add CSS specifically for this page -->
+<link rel="stylesheet" href="../static/css/community.css">
+
+<div class="container">
+    <h1 class="page-title">Community Support</h1>
+
+    <!-- Post a New Query Button -->
+    <div class="post-query">
+        <a href="{{ url_for('post_query', id=user._id) }}" class="btn btn-primary">📌 Post a New Query</a>
+    </div>
+
+    <!-- User's Queries & Replies -->
+    <div class="section">
+        <h2>Your Queries</h2>
+        {% if user_queries %}
+            {% for query in user_queries %}
+                <div class="query-card">
+                    <h3>{{ query.title }}</h3>
+                    <p><strong>Domain:</strong> {{ query.domain }}</p>
+                    <p>{{ query.description }}</p>
+                    <p><small>Posted on: {{ query.date_posted.strftime('%Y-%m-%d') }}</small></p>
+
+                    <!-- Replies -->
+                    {% if query.replies %}
+                        <div class="replies">
+                            <h4>Replies:</h4>
+                            {% for reply in query.replies %}
+                                <div class="reply-card">
+                                    <p><strong>{{ reply.replyer }}:</strong> {{ reply.text }}</p>
+                                    <p><small>Replyed on: {{ reply.timestamp.strftime('%Y-%m-%d') }}</small></p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>No replies yet.</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You haven't posted any queries yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Other Users' Queries & Replies -->
+    <div class="section">
+        <h2>Other Queries</h2>
+        {% if other_queries %}
+            {% for query in other_queries %}
+                <div class="query-card">
+                    <h3>{{ query.title }}</h3>
+                    <p><strong>Domain:</strong> {{ query.domain }}</p>
+                    <p>{{ query.description }}</p>
+                    <p><small>Posted by: {{ query.questioner_id }}</small></p>
+
+                    <!-- Replies -->
+                    {% if query.replies %}
+                        <div class="replies">
+                            <h4>Replies:</h4>
+                            {% for reply in query.replies %}
+                                <div class="reply-card">
+                                    <p><strong>{{ reply.replyer }}:</strong> {{ reply.text }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>No replies yet.</p>
+                    {% endif %}
+
+                    <!-- Reply Button -->
+                    <a href="{{ url_for('reply', query_id=query._id, id=user._id) }}" class="btn btn-secondary">💬 Reply</a> 
+                
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No queries available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
